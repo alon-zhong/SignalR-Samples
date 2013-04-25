@@ -1,0 +1,64 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>WindowsStoreJavaScript</title>
+
+    <!-- WinJS references -->
+    <link href="//Microsoft.WinJS.1.0/css/ui-dark.css" rel="stylesheet" />
+    <script src="//Microsoft.WinJS.1.0/js/base.js"></script>
+    <script src="//Microsoft.WinJS.1.0/js/ui.js"></script>
+
+    <!-- WindowsStoreJavaScript references -->
+    <link href="/css/default.css" rel="stylesheet" />
+    <script src="/js/default.js"></script>
+
+    <script src="Scripts/jquery-1.6.4.js"></script>
+    <script src="Scripts/jquery.signalR-1.1.0-beta1.js"></script>
+    <script src="Scripts/signalr.hubs.js"></script>
+    <script type="text/javascript">
+        $.connection.testHub.client.received = function (data) {
+            $("#Messages").append("<li>" + data + "</li>");
+        }
+
+        $.connection.hub.url = "http://localhost:22278/signalr";
+        $.connection.hub.logging = true;
+        $.connection.hub.connectionSlow = function () {
+            $("#Messages").append("<li>[connectionSlow]</li>");
+        }
+        $.connection.hub.disconnected = function () {
+            $("#Messages").append("<li>[disconnected]</li>");
+        }
+        $.connection.hub.error = function (error) {
+            $("#Messages").append("<li>[error]" + error + "</li>");
+        }
+        $.connection.hub.received = function () {
+            $("#Messages").append("<li>[disconnected]</li>");
+        }
+        $.connection.hub.reconnected = function () {
+            $("#Messages").append("<li>[reconnected]</li>");
+        }
+        $.connection.hub.reconnecting = function () {
+            $("#Messages").append("<li>[reconnecting]</li>");
+        }
+        $.connection.hub.starting = function () {
+            $("#Messages").append("<li>[starting]</li>");
+        }
+        $.connection.hub.stateChanged = function (change) {
+            $("#Messages").append("<li>[stateChanged]</li>");
+        }
+
+        $.connection.hub.start().
+            done(function () {
+                $("#Messages").append("<li>Connected</li>");
+                $.connection.testHub.server.sendToCaller("Hello!");
+            }).
+            fail(function (error) {
+                $("#Messages").append("<li>Failed to connect: " + error + "</li>");
+            });
+    </script>
+</head>
+<body>
+    <ul id="Messages"></ul>
+</body>
+</html>
