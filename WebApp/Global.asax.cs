@@ -10,7 +10,7 @@ namespace WebApp
         {
             HubConfiguration hubConfiguration = new HubConfiguration()
             {
-                //EnableCrossDomain = true,
+                EnableCrossDomain = true,
                 EnableDetailedErrors = true,
                 EnableJavaScriptProxies = true,
             };
