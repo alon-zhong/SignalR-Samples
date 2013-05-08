@@ -17,7 +17,7 @@ namespace WindowsPhoneClient
             TextBoxWriter traceWriter = new TextBoxWriter(Context, textBox);
 
             //windows phone emulator is a virtual machine and http://localhost does not work
-            string url = "http://signalr01.cloudapp.net:81/";
+            string url = "http://signalr01.cloudapp.net/";
             HubConnection hubConnection = new HubConnection(url);
             hubConnection.TraceWriter = traceWriter;
             hubConnection.TraceLevel = TraceLevels.All;
