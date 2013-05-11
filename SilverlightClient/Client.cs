@@ -16,7 +16,7 @@ namespace SilverlightClient
             TextBox textBox = (TextBox)Page.FindName("Messages");
             TextBoxWriter traceWriter = new TextBoxWriter(Context, textBox);
 
-            string url = "http://localhost:22278/";
+            string url = "http://signalr01.cloudapp.net/";
             HubConnection hubConnection = new HubConnection(url);
             hubConnection.TraceWriter = traceWriter;
             hubConnection.TraceLevel = TraceLevels.All;
