@@ -14,7 +14,7 @@ namespace ConsoleClient
             StreamWriter traceWriter = new StreamWriter("HubConnection.log.txt");
             traceWriter.AutoFlush = true;
 
-            string url = "http://localhost:8080";
+            string url = "http://localhost:22278/";
 
             HubConnection hubConnection = new HubConnection(url);
             hubConnection.TraceWriter = traceWriter;
